@@ -1,0 +1,9 @@
+{
+  "size": 124284080,
+  "sha256": "db0e33053f4f8006fa7b596c1d5cc38cf0b500d7c177b3b0d4fdd8df73d5f459",
+  "parts": [
+    "index.pck.part01",
+    "index.pck.part02",
+    "index.pck.part03"
+  ]
+}
