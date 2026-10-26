@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b101a">
+  <meta name="description" content="Uma urna de videogame: escolha a edição 13 ou 22 de Brasil em Apuros! e comece a aventura grátis no navegador.">
+  <meta property="og:title" content="A Urna da Confusão | Brasil em Apuros!">
+  <meta property="og:description" content="Duas campanhas satíricas, quatro personagens e uma escolha que só vale no videogame.">
+  <title>A Urna da Confusão — Brasil em Apuros!</title>
+  <link rel="icon" href="./13/index.icon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./urna.css?v=1">
+  <script defer src="./urna.js?v=1"></script>
+</head>
+<body>
+  <a href="#conteudo" class="skip">Pular para as campanhas</a>
+  <div class="atmosphere" aria-hidden="true"><span class="left"></span><span class="right"></span></div>
+  <header class="header">
+    <a class="identity" href="./" aria-label="Voltar ao portal Brasil em Apuros"><span class="mark">P<span>★</span></span><span>PRÓXIMA ERA <strong>GAMES</strong></span></a>
+    <a class="back" href="./">← VOLTAR AO SITE</a>
+  </header>
+  <main id="conteudo" class="container">
+    <div class="intro">
+      <p class="eyebrow"><span class="light" aria-hidden="true"></span> BRASIL EM APUROS! · PRÓXIMA ERA GAMES</p>
+      <p class="step">01 / DEFINA O SEU CAMINHO</p>
+      <h1>NA URNA, <em>QUEM DECIDE É VOCÊ.</em></h1>
+      <p class="lead">Escolha uma das duas campanhas de plataforma. A votação é uma brincadeira fictícia: ela apenas seleciona qual jogo abrir.</p>
+    </div>
+
+    <section class="ballot" aria-labelledby="choice-heading">
+      <div class="ballot-bar">
+        <span class="ballot-icon" aria-hidden="true">★</span>
+        <div><span class="smallcap">URNA DA CONFUSÃO</span><h2 id="choice-heading">QUAL É A SUA CAMPANHA?</h2></div>
+        <span class="mock-seal">SÓ NO JOGO</span>
+      </div>
+      <div class="options" aria-label="Campanhas disponíveis">
+        <a class="option red" href="./13/" data-edicao="13" aria-describedby="desc13">
+          <span class="number">13</span>
+          <div class="option-image"><img src="./media/menu13.png" alt="Prévia real do menu da campanha de Lula e Alckmin" loading="eager"></div>
+          <div class="option-body"><span class="option-label">EDIÇÃO 13</span><strong>O RESGATE DE JANJA</strong><span id="desc13" class="description">Jogue como Lula ou Alckmin em Brasília e no castelo.</span></div>
+          <span class="option-check" aria-hidden="true">✓</span>
+        </a>
+        <a class="option green" href="./22/" data-edicao="22" aria-describedby="desc22">
+          <span class="number">22</span>
+          <div class="option-image"><img src="./media/menu22.png" alt="Prévia real do menu da campanha de Flávio e Eduardo" loading="eager"></div>
+          <div class="option-body"><span class="option-label">EDIÇÃO 22</span><strong>OPERAÇÃO BOLSONARO</strong><span id="desc22" class="description">Jogue como Flávio ou Eduardo entre Brasília e Washington.</span></div>
+          <span class="option-check" aria-hidden="true">✓</span>
+        </a>
+      </div>
+      <div class="console">
+        <div class="display" aria-live="polite" aria-atomic="true">
+          <span class="smallcap">VISOR DA URNA FICTÍCIA</span>
+          <p id="selecao">Selecione 13 ou 22 para escolher seu jogo.</p>
+        </div>
+        <button type="button" id="confirmar" class="confirm" disabled>CONFIRMAR E JOGAR <span aria-hidden="true">→</span></button>
+      </div>
+      <noscript><p class="no-js">JavaScript está desativado: toque diretamente na imagem de uma campanha para abrir o jogo.</p></noscript>
+    </section>
+    <p class="disclaimer">Esta urna é uma interface de entretenimento, sem relação com a Justiça Eleitoral. A seleção não é um voto real e não é registrada, contabilizada ou enviada a servidores. Paródia independente, sem endosso político. Versões Web em acesso antecipado.</p>
+    <nav class="direct" aria-label="Outras formas de jogar"><a href="./13/">Ir direto ao jogo 13</a><a href="./22/">Ir direto ao jogo 22</a><a href="./#downloads">Baixar para Android ou Windows</a></nav>
+  </main>
+  <footer class="footer">© 2026 PRÓXIMA ERA GAMES · DOIS JOGOS, DUAS AVENTURAS.</footer>
+</body>
+</html>
