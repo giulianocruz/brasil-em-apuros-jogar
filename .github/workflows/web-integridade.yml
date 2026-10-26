@@ -1,0 +1,33 @@
+name: Verificar publicação Web
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'urna.html'
+      - 'urna.css'
+      - 'urna.js'
+      - 'premium.css'
+      - 'premium.js'
+      - 'media/**'
+      - '13/**'
+      - '22/**'
+      - 'tools/verificar-publicacao.mjs'
+      - '.github/workflows/web-integridade.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validar-pacotes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalar Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar links, integridade e hash dos dois jogos
+        run: node tools/verificar-publicacao.mjs
