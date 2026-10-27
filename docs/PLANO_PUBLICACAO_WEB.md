@@ -7,8 +7,9 @@
 
 - O portal principal está em index.html, e a escolha satírica da campanha em urna.html.
 - As pastas 13/ e 22/ contêm exportações Web já segmentadas (index.pck.part01..03, index.wasm, loader e Service Worker).
-- O repositório possui a release v2026.10.26 com APKs e ZIPs Windows das duas edições.
-- As exportações de 26/10 foram criadas **antes** dos commits posteriores que adicionaram o cachorro Caramelo às duas edições. **Não promover essas exportações como builds atualizadas com o Caramelo.**
+- A release `v2026.10.26` contém os APKs **Android RC1** (anteriores à integração do Caramelo) e os primeiros ZIPs Windows.
+- O commit `39ee80f` de 26/10 atualizou **as duas exportações Web** com o Caramelo. O deploy GitHub Pages do commit `b0cbbe3` concluiu com sucesso em 26/10; ainda é necessário validar o jogo aberto no navegador.
+- A release `v2026.10.26.2` contém os ZIPs **Windows RC2** com o Caramelo. Os APKs Android ainda requerem novas builds a partir dos fontes atuais.
 - Código mais recente da edição 13: giulianocruz/BrasilEmApuros13, branch main.
 - Código mais recente da edição 22: giulianocruz/BrasilEmApuros_GitHub_v2.4, branch feat/brasil22-beta46-20261026. A branch padrão do repositório 22 é outra; não exportar a padrão por engano.
 - A página da urna **só direciona** para o jogo escolhido. Os personagens Lula/Alckmin e Flávio/Eduardo continuam sendo escolhidos dentro de seus jogos.
@@ -27,6 +28,13 @@ Para verificar rapidamente caminhos e tamanhos, sem ler os pacotes de centenas d
 O verificador confere links locais, navegação 13/22, integridade dos segmentos .pck (inclusive SHA-256 na execução completa), WebAssembly e configuração de carregamento do Godot. O GitHub Actions executa a verificação completa em pull requests.
 
 **Limite:** testes estáticos não substituem abrir o jogo no navegador nem passar as duas campanhas completas.
+
+## Próximo ciclo: atualizar os APKs Android
+
+1. Usar o código atual do 13 (`main`) e o código atual do 22 (`feat/brasil22-beta46-20261026`), sem exportar por engano a branch padrão antiga do 22.
+2. Reexecutar os testes automatizados, especialmente `qa_caramelo.gd`, e testar personagens, chefes, resgates e controles multitouch.
+3. Exportar os dois APKs Android para uma nova RC; conferir IDs de pacote diferentes, versionCode e assinatura de distribuição, sem subir chaves para o GitHub.
+4. Instalar e verificar em aparelho Android real. Somente depois anexar os novos APKs à release e atualizar os links do portal.
 
 ## Antes de atualizar o Web
 
@@ -50,7 +58,7 @@ O verificador confere links locais, navegação 13/22, integridade dos segmentos
 - [ ] Lula, Alckmin, Flávio e Eduardo aparecem, se movem, pulam e atacam corretamente.
 - [ ] Maletas, cartucho, escudo, esquiva, inimigos, chefe, checkpoint e vitória funcionam.
 - [ ] Janja e Bolsonaro são exibidos somente nas histórias corretas.
-- [ ] O cachorro Caramelo está presente **após** novos exports do código atualizado.
+- [ ] O cachorro Caramelo aparece e se movimenta nas duas edições Web/Windows RC2 após teste manual; as builds Android RC1 ainda não foram atualizadas.
 - [ ] Android físico, navegador mobile em paisagem e desktop tiveram controles/áudio avaliados.
 - [ ] Downloads APK/Windows levam aos arquivos corretos de uma release existente.
 - [ ] O domínio definitivo serve a mesma versão aprovada, sem afetar o jogo República dos Malandros.
