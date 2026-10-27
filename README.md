@@ -39,3 +39,11 @@ Veja docs/PLANO_PUBLICACAO_WEB.md para homologação manual, regeneração dos p
 - Código 22: https://github.com/giulianocruz/BrasilEmApuros_GitHub_v2.4/tree/feat/brasil22-beta46-20261026
 
 **Estado em 27/10/2026:** Web e Windows RC2 já incluem o cachorro Caramelo. Os dois APKs Android RC2 foram exportados, verificados e publicados como **pré-lançamento**. Ainda são necessários testes completos dos quatro protagonistas em celulares reais, além da assinatura Android definitiva, antes de considerar o projeto uma versão 1.0 estável.
+
+## Novo minigame — Correria no Planalto (beta 0.1)
+
+Versão leve em HTML5, com Lula/Alckmin (13) e Flávio/Eduardo (22), maletas, papelada, escudo Caramelo, 45/90 s e pontuações locais. Reutiliza sprites das campanhas Godot; não modifica as edições originais.
+
+**Jogar:** https://giulianocruz.github.io/brasil-em-apuros-jogar/arcade/
+
+**Código, assets e QA:** [arcade/](arcade/)
