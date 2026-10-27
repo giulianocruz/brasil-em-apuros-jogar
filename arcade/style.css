@@ -6,3 +6,20 @@
 @media(max-height:630px){.shell{padding:0;gap:0}.topbar,.outer-footer{display:none}.device{width:min(100vw,calc(100dvh * .527));border-radius:0}.start-screen{gap:5px}.roster{min-height:94px}.fighter{min-height:96px}.fighter .fighter-picture{inset:0 0 24px}.game-brand .description{display:none}}
 @media(max-width:350px){.start-screen{padding:11px;gap:5px}.game-brand h1{font-size:32px}.campaign small{font-size:8px}.fighter{min-height:105px}.roster{min-height:105px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Arcade 0.2 — habilidades originais, legibilidade e comandos móveis */
+.ability-hint{margin:0;min-height:34px;padding:7px 9px;border-radius:9px;border:1px solid #eecb7c58;background:linear-gradient(110deg,#3a2d22c9,#132b3eae);font-size:10px;font-weight:850;line-height:1.35;color:#ffe3a9;text-align:center;letter-spacing:.25px}
+.phase-pill{margin:7px auto 0;width:max-content;max-width:100%;font-size:9px;font-weight:950;letter-spacing:1.15px;color:#ffd992;text-align:center;text-shadow:0 2px 6px #000c}
+.game-controls{align-items:end;gap:7px}
+.game-controls .special-button{width:auto;min-width:135px;max-width:calc(100% - 146px);height:64px;padding:8px 12px;border:1px solid #b6b0ac70;border-radius:14px;background:linear-gradient(155deg,#273a53dc,#17233ade);font-size:11px;line-height:1.1;color:#d6d6df;opacity:.82;transition:box-shadow .18s,background .18s,transform .18s}
+.game-controls .special-button span{display:block;font-size:11px;color:#c6af91;margin-top:4px}
+.game-controls .special-button:disabled{cursor:default}
+.game-controls .special-button.ready{opacity:1;background:linear-gradient(165deg,#ffe8a6,#e8a63b);border-color:#ffe8a8;box-shadow:0 0 24px #ffcf6d78;color:#152438;animation:power-pulse 1.1s ease-in-out infinite alternate}
+.game-controls .special-button.ready span{color:#502d00}
+.game-controls .special-button.ready:active{transform:scale(.95)}
+.result-stats{grid-template-columns:repeat(4,minmax(0,1fr));padding:13px 4px}
+.result-stats strong{font-size:clamp(16px,4.7vw,21px)}
+.result-stats small{font-size:8px}
+@keyframes power-pulse{from{box-shadow:0 0 10px #ffcf6d33}to{box-shadow:0 0 25px #ffcf6d99}}
+@media(max-width:350px){.game-controls{padding:0 9px}.game-controls button:not(.special-button){width:53px;height:53px}.game-controls .special-button{min-width:125px;max-width:calc(100% - 115px)}.ability-hint{font-size:9px;padding:5px}}
+@media(prefers-reduced-motion:reduce){.game-controls .special-button.ready{animation:none}}
