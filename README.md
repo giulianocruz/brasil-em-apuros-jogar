@@ -33,8 +33,9 @@ Veja docs/PLANO_PUBLICACAO_WEB.md para homologação manual, regeneração dos p
 ## Links
 
 - Portal de testes: https://giulianocruz.github.io/brasil-em-apuros-jogar/
-- Downloads atuais: https://github.com/giulianocruz/brasil-em-apuros-jogar/releases/tag/v2026.10.26
+- Android RC1 (edições 13 e 22): https://github.com/giulianocruz/brasil-em-apuros-jogar/releases/tag/v2026.10.26
+- Windows RC2 (edições 13 e 22, com Caramelo): https://github.com/giulianocruz/brasil-em-apuros-jogar/releases/tag/v2026.10.26.2
 - Código 13: https://github.com/giulianocruz/BrasilEmApuros13
 - Código 22: https://github.com/giulianocruz/BrasilEmApuros_GitHub_v2.4/tree/feat/brasil22-beta46-20261026
 
-**Atenção:** as exportações Web e downloads atuais são anteriores aos commits mais recentes com o cachorro Caramelo. Será necessário gerar novas builds para incluí-lo nas versões públicas.
+**Estado em 27/10/2026:** as exportações **Web** das duas edições foram atualizadas para incluir o cachorro Caramelo no commit `39ee80f` (26/10), e o último deploy GitHub Pages de 26/10 concluiu com sucesso. Os ZIPs **Windows RC2** também incluem o Caramelo. Os **APKs Android RC1** foram gerados antes dessa integração e ainda precisam de nova exportação e homologação em aparelho físico. O sucesso do deploy e das verificações estáticas não substitui testes manuais de gameplay no navegador e no celular.
