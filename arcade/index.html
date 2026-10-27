@@ -9,8 +9,8 @@
   <meta property="og:description" content="Escolha um personagem, pegue maletas e desvie da papelada em um arcade satírico de 45 ou 90 segundos.">
   <title>Correria no Planalto | Brasil em Apuros!</title>
   <link rel="icon" href="../13/index.icon.png" type="image/png">
-  <link rel="stylesheet" href="./style.css?v=1">
-  <script src="./game.js?v=1" defer></script>
+  <link rel="stylesheet" href="./style.css?v=2">
+  <script src="./game.js?v=2" defer></script>
 </head>
 <body>
   <div class="shell">
@@ -34,6 +34,7 @@
         </div>
         <div class="section-heading"><span>ESCOLHA SEU PERSONAGEM</span><span class="section-rule"></span></div>
         <div class="roster" id="roster" role="group" aria-label="Personagens disponíveis"></div>
+        <p class="ability-hint" id="abilityHint" aria-live="polite">HABILIDADE ESPECIAL</p>
         <div class="section-heading"><span>DURAÇÃO DA CORRERIA</span><span class="section-rule"></span></div>
         <div class="duration" role="group" aria-label="Duração da partida">
           <button class="duration-option selected" data-seconds="45" aria-pressed="true">45s <span>CLÁSSICO</span></button>
@@ -56,12 +57,14 @@
             <div class="hud-right"><small>VIDAS</small><strong id="hudLives">♥ ♥ ♥</strong></div>
           </div>
           <div class="timer-track"><div id="timerFill" class="timer-fill"></div></div>
+          <div class="phase-pill" id="hudPhase">ATO I • PRIMEIROS CARIMBOS</div>
           <div class="hud-detail"><span id="hudCombo">COLETE MALETAS • DESVIE DOS PROCESSOS</span><button id="pauseButton" aria-label="Pausar jogo">Ⅱ</button></div>
         </div>
         <div class="float-feedback" id="feedback" aria-live="polite"></div>
         <div class="touch-hint" aria-hidden="true">ARRASTE OU TOQUE PARA MOVER • ◀ ▶</div>
         <div class="game-controls" aria-label="Controles de movimento">
           <button id="leftButton" aria-label="Mover para esquerda">◀</button>
+          <button id="specialButton" class="special-button" aria-label="Habilidade especial carregando" disabled>✦ PODER <span id="specialCharge">0%</span></button>
           <button id="rightButton" aria-label="Mover para direita">▶</button>
         </div>
         <div class="overlay hidden" id="pauseOverlay" role="dialog" aria-modal="true" aria-labelledby="pauseTitle">
@@ -86,6 +89,7 @@
             <div><small>RECORDE</small><strong id="resultBest">0</strong></div>
             <div><small>MALETAS</small><strong id="resultCases">0</strong></div>
             <div><small>COMBO MÁX.</small><strong id="resultCombo">0</strong></div>
+            <div><small>PODERES</small><strong id="resultPowers">0</strong></div>
           </div>
           <p class="result-copy" id="resultCopy"></p>
           <button class="primary-button" id="againButton">↻ JOGAR DE NOVO</button>
@@ -102,11 +106,12 @@
           <div class="lesson"><span>💼</span><p><strong>PEGUE AS MALETAS</strong>Some pontos e acumule combos para multiplicar a pontuação.</p></div>
           <div class="lesson"><span>📑</span><p><strong>DESVIE DOS PROCESSOS</strong>Cada colisão custa uma vida. Você começa com três.</p></div>
           <div class="lesson"><span>🐕</span><p><strong>CARAMELO TE PROTEGE</strong>O escudo bloqueia um processo; café devolve uma vida.</p></div>
+          <div class="lesson"><span>✦</span><p><strong>ATIVE SEU PODER ESPECIAL</strong>Junte cinco maletas para carregar o poder do personagem. Toque em PODER ou pressione Enter. Cada personagem tem uma habilidade diferente.</p></div>
           <button class="primary-button" id="gotItButton">ENTENDI!</button>
         </div>
       </section>
     </main>
-    <footer class="outer-footer">UM JOGO ORIGINAL DE HUMOR BRASILEIRO • MOBILE + WEB • VERSÃO DE TESTE 0.1</footer>
+    <footer class="outer-footer">UM JOGO ORIGINAL DE HUMOR BRASILEIRO • MOBILE + WEB • VERSÃO DE TESTE 0.2</footer>
   </div>
 </body>
 </html>
