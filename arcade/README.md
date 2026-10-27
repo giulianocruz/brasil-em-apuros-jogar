@@ -1,36 +1,41 @@
-# Brasil em Apuros! — Correria no Planalto (minigame 0.1)
+# Brasil em Apuros! — Correria no Planalto (mini arcade v0.2)
 
-Spin-off satírico e independente do jogo Godot 13/22 e do Boleto Rush Android. HTML5 Canvas, CSS, JavaScript puro, sem bibliotecas, APIs, rastreamento ou anúncios. **Não altera as campanhas originais.**
+**Spin-off original de sátira claramente fictícia**, construído com HTML5 Canvas, CSS e JavaScript sem frameworks. Aproveita sprites de Lula, Alckmin, Flávio e Eduardo dos projetos Brasil em Apuros 13/22, **sem alterar os jogos de plataforma Godot** nem o Boleto Rush.
 
-## Mecânica
+## Jogar
+https://giulianocruz.github.io/brasil-em-apuros-jogar/arcade/
 
-- Partidas Clássico 45 s e Maratona 90 s.
-- Escolha satírica entre duas equipes: 13 (Lula e Alckmin) e 22 (Flávio e Eduardo).
-- Controle por toque/arrasto no celular, teclado nas setas ou teclas A/D, botões de direção acessíveis.
-- Colete maletas (pontos e combos), evite processos (dano), receba proteção do cachorro caramelo (escudo de um impacto), ganhe vida extra com café.
-- 3 vidas; pausa/resume; placar; recorde salvo apenas no navegador, por personagem + duração; compartilhar pontuação.
-- Sem votação real, sem coleta ou envio de dados e sem campanha eleitoral; sátira claramente fictícia.
+O arcade foi criado como um jogo web próprio e também oferece um manifesto para "Adicionar à tela inicial" no Android/iOS quando o navegador permitir. Não há APK nativo desta edição neste momento.
 
-## Assets reutilizados
+## Mecânicas v0.2
+- Seleção de **quatro caricaturas jogáveis**: Lula e Alckmin (13), Flávio e Eduardo (22), com sprites originais.
+- Partidas de **45 e 90 segundos**; três atos visuais com dificuldade gradual.
+- Pegue maletas para ganhar pontos, combos e 20% de carga de habilidade por maleta.
+- Aperte **PODER** ou **Enter** quando chegar a 100% (cinco maletas).
+- Habilidades de fantasia satírica: Lula atrai maletas por 6 s; Alckmin ganha um escudo imediato; Flávio recebe 4 s de proteção; Eduardo limpa os processos na tela e os desacelera por 6 s.
+- Obstáculos de papelada, cão Caramelo como escudo de um impacto, café para recuperar vida e até 3 vidas.
+- Som opcional, pausa, tutorial, touch, botões acessíveis e teclado A/D/setas.
+- Recordes separados por personagem e duração, localmente no navegador; opção de compartilhar resultado.
+- Novo resultado com total de poderes ativados.
 
-Os PNGs abaixo foram copiados dos repositórios **do mesmo titular** `giulianocruz/BrasilEmApuros_GitHub_v2.4`, branch `feat/brasil22-beta46-20261026`, mantendo a autoria e sem copiar arquivos internos do jogo Godot:
+## Suporte de app no navegador
+- `manifest.webmanifest`, `arcade-icon.svg` e `sw.js` dão suporte à instalação na tela inicial e cache do arcade, conforme compatibilidade do navegador.
+- Service Worker com escopo **apenas /arcade/**; não controla a urna nem os jogos Godot 13/22.
+- Em navegação online, se cache ou imagem falhar, o gameplay mantém placeholders vetoriais.
+- Offline depende de uma visita online anterior, instalação/ativação e sucesso do cache inicial. Verifique em celular físico; não apresentar suporte offline como homologado.
+- Não existe AdMob na versão web; não há anúncios nem rastreamento.
 
-- `assets/lula_idle.png`, `assets/lula_run.png`
-- `assets/alckmin_idle.png`, `assets/alckmin_run.png`
-- `assets/flavio_idle.png`, `assets/flavio_run.png`
-- `assets/eduardo_idle.png`, `assets/eduardo_run.png`
-- `assets/maleta.png`
+## Arte e direitos
+Sprites de `giulianocruz/BrasilEmApuros_GitHub_v2.4` branch `feat/brasil22-beta46-20261026`, fornecidos pelo mesmo titular. Assets locais em `arcade/assets/` e cenário em `../media/hero13.jpg` ou `../media/hero22.jpg`.
 
-O fundo usa `../media/scene_castelo.jpg`, já publicado neste portal. Os sprites são renderizados frame a frame em Canvas.
+## Qualidade
+O projeto contém testes sem navegador externo:
+```sh
+node --check arcade/game.js
+node --check arcade/sw.js
+node --test arcade/tests/*.test.mjs
+```
+O workflow `.github/workflows/arcade-qa.yml` repete os testes em pushes e PRs afetando `arcade/**`. Ainda precisam ser feitos testes de toque e desempenho em telefone Android/iOS reais, checagem visual dos sprites e verificação real do cache offline.
 
-## Rodar/testar
-
-Servir o diretório raiz do portal via HTTP (ex.: `python -m http.server 8080`); abrir `http://localhost:8080/arcade/` em navegador moderno ou `https://giulianocruz.github.io/brasil-em-apuros-jogar/arcade/` quando Pages publicar a mudança.
-
-O jogo permanece jogável mesmo se um PNG falhar (fallback vetorial). A versão web não integra AdMob Android: anúncios opcionais dependem de um aplicativo nativo e de nova configuração de privacidade.
-
-## Próximos passos de QA
-
-- Teste físico Android/iOS e navegação portrait na tela pequena.
-- Conferir visual de sprites em aparelhos com DPR elevado, fluidez e orientação.
-- Se aprovado, empacotar como app Android separado do Boleto Rush com identidade visual própria.
+## Publicação
+Arquivos estáticos do diretório `arcade/` são publicados via GitHub Pages do repositório `brasil-em-apuros-jogar`. O portal principal inclui acesso dedicado à nova edição. Sem vínculo político institucional, sem contagem de votos reais e sem coleta de dados de usuários.
