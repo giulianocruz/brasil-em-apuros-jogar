@@ -56,3 +56,32 @@ A workflow manual `.github/workflows/deploy-coolify-web.yml` aciona o deploy da 
 - A workflow solicita implantação do recurso existente; não cria aplicações nem modifica DNS. Conferir estado em Coolify → Deployments.
 
 Referências: https://coolify.io/docs/applications/builds/dockerfile e https://coolify.io/docs/api/endpoints/deployments/deploy-by-tag-or-uuid.
+
+
+## Automatizar a primeira instalação via GitHub Actions
+
+O workflow **Instalar ou atualizar Brasil em Apuros no Coolify** permite criar o aplicativo sem terminal SSH, inclusive quando o Desktop Commander está sem franquia. Usa os endpoints oficiais de inventário, criação de aplicação pública e deploy do Coolify. Ele nunca modifica o DNS do domínio raiz nem migra o banco PHP.
+
+Em **https://github.com/giulianocruz/brasil-em-apuros-jogar/settings/secrets/actions**, cadastre o segredo de repositório **COOLIFY_API_TOKEN** (um token do Coolify com permissões suficientes de leitura, escrita e deploy, restrito à equipe/escopo relevante). Não cole o token em issues, arquivos, respostas de chat ou variáveis públicas.
+
+Em **https://github.com/giulianocruz/brasil-em-apuros-jogar/settings/variables/actions**, cadastre as variáveis:
+
+- `COOLIFY_BASE_URL`: URL do painel Coolify em **HTTPS**, sem `/api/v1` ou barras finais (exemplo: `https://painel.seudominio.com`). Não use acesso inseguro por HTTP:8000 para enviar o token pela internet.
+- `COOLIFY_PROJECT_UUID`: identificador UUID exato do projeto escolhido no Coolify.
+- `COOLIFY_SERVER_UUID`: UUID exato do servidor VPS no Coolify.
+- `COOLIFY_ENVIRONMENT_NAME`: nome do ambiente (opcional; padrão `production`).
+- `COOLIFY_APP_UUID`: opcional, para vincular uma aplicação existente já conhecida. O workflow recusa apontar para aplicação de outro repositório.
+
+Para obter projeto/servidor, consulte o painel do Coolify ou, com API habilitada, as rotas `GET /api/v1/projects` e `GET /api/v1/servers`. Não invente UUIDs. A API do Coolify deve estar **habilitada** e sua configuração de IP Allowlist precisa autorizar a origem GitHub Actions, sem desativar proteções de acesso desnecessariamente.
+
+Abra **https://github.com/giulianocruz/brasil-em-apuros-jogar/actions/workflows/coolify-provision-web.yml**, clique **Run workflow** em `main` e selecione:
+
+- **inspect**: valida acesso à API e lê inventário; não faz mudanças;
+- **provision**: valida projeto/servidor, cria somente a aplicação `brasil-em-apuros-13-22-web` se ainda não existir e solicita o primeiro deploy;
+- **redeploy**: apenas solicita a atualização da aplicação existente, se a identidade do repositório e a build Dockerfile forem compatíveis.
+
+Esse workflow nunca faz deploy automático ao receber um PR. Aplicações homônimas duplicadas, tokens ausentes ou fontes divergentes produzem erro explícito, sem alterar recursos existentes. Domínio temporário é gerado pelo Coolify; **não aponte `republicadosmalandros.com.br` diretamente para esta aplicação**, pois o jogo original PHP/MySQL ainda existe na hospedagem antiga.
+
+Depois de executar `provision`, o Coolify precisa indicar aplicação saudável e permitir abrir os jogos usando o endereço HTTPS emitido. O êxito da API ao enfileirar o deploy não é prova de que o jogo já está rodando. Execute a homologação de `/13/`, `/22/`, `/urna.html`, `/health` e controles nos navegadores reais.
+
+Documentação oficial: https://coolify.io/docs/api/endpoints/applications/create-public-application e https://coolify.io/docs/api/endpoints/deployments/deploy-by-tag-or-uuid.

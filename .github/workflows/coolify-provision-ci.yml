@@ -1,0 +1,26 @@
+name: Validar integração Coolify API
+on:
+  pull_request:
+    paths:
+      - 'tools/coolify-provision-vps.mjs'
+      - 'tools/coolify-provision-vps.test.mjs'
+      - '.github/workflows/coolify-provision-web.yml'
+      - '.github/workflows/coolify-provision-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar sintaxe do orquestrador
+        run: node --check tools/coolify-provision-vps.mjs
+      - name: Testar sem rede ou token de produção
+        run: node --test tools/coolify-provision-vps.test.mjs
