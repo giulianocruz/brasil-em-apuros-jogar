@@ -9,6 +9,13 @@
     eduardo: { name: 'EDUARDO', team: '22', idle: './assets/eduardo_idle.png', run: './assets/eduardo_run.png', iw: 96, ih: 128, rw: 96, rh: 128 }
   };
   const TEAMS = { '13': ['lula', 'alckmin'], '22': ['flavio', 'eduardo'] };
+  const SPECIALS = {
+    lula: { title: 'PALANQUE MAGNÉTICO', desc: 'Atrai maletas próximas por 6 segundos', color: '#ffce6a' },
+    alckmin: { title: 'PLANO B', desc: 'Garante um escudo protetor imediato', color: '#8cf1cc' },
+    flavio: { title: 'CORRERIA TURBO', desc: 'Fica protegido por 4 segundos', color: '#77d8ff' },
+    eduardo: { title: 'PASSAPORTE VIP', desc: 'Remove a papelada da tela e desacelera o perigo', color: '#d1a4ff' }
+  };
+  const ACTS = ['ATO I • PRIMEIROS CARIMBOS', 'ATO II • PILHAS DE PAPEL', 'ATO III • PRAZO FINAL'];
   const $ = (id) => document.getElementById(id);
   const canvas = $('gameCanvas');
   const ctx = canvas.getContext('2d', { alpha: false });
@@ -70,6 +77,7 @@
       btn.classList.toggle('selected', selected);
       btn.setAttribute('aria-pressed', String(selected));
     });
+    $('abilityHint').textContent = '✦ ' + SPECIALS[hero].title + ' — ' + SPECIALS[hero].desc;
     const roster = $('roster');
     roster.replaceChildren();
     for (const id of TEAMS[team]) {
@@ -147,6 +155,7 @@
     keyboard.left = keyboard.right = false;
     game = {
       time: 0, score: 0, lives: 3, combo: 0, maxCombo: 0, cases: 0, hits: 0,
+      specialCharge: 0, specialTimer: 0, specialCount: 0, act: 0,
       playerX: WIDTH / 2, targetX: WIDTH / 2, drops: [], particles: [], floaters: [],
       shield: false, hurtFor: 0, emit: 0, nextId: 0, effectMessage: '', effectFor: 0,
       shake: 0, theme: team, character: hero, goal: duration, finished: false
@@ -168,6 +177,27 @@
     cancelAnimationFrame(frameId);
     phase = 'menu'; game = null; show('menu'); syncSetup();
   }
+  function activateSpecial() {
+    if (phase !== 'play' || !game || game.specialCharge < 100) return;
+    const g = game;
+    g.specialCharge = 0;
+    g.specialCount++;
+    const power = SPECIALS[g.character];
+    g.specialTimer = g.character === 'flavio' ? 4 : 6;
+    if (g.character === 'alckmin') {
+      g.shield = true;
+    } else if (g.character === 'flavio') {
+      g.hurtFor = Math.max(g.hurtFor, 4);
+    } else if (g.character === 'eduardo') {
+      const papers = g.drops.filter(item => item.kind === 'paper');
+      for (const item of papers) addParticles(item.x, item.y, '#d1a4ff', 4);
+      g.drops = g.drops.filter(item => item.kind !== 'paper');
+    }
+    flash('✦ ' + power.title + '!', power.color);
+    tone('shield');
+    updateHud();
+  }
+
   function spawn() {
     const roll = Math.random();
     let kind = roll < .053 ? 'dog' : roll < .083 ? 'coffee' : roll < .59 ? 'case' : 'paper';
@@ -188,7 +218,12 @@
     if (drop.kind === 'case') {
       g.combo++; g.maxCombo = Math.max(g.maxCombo, g.combo); g.cases++;
       const earned = 10 + Math.min(10, g.combo - 1) * 3;
-      g.score += earned; flash(`+${earned} MALETA!`);
+      g.score += earned;
+      const previouslyReady = g.specialCharge === 100;
+      g.specialCharge = Math.min(100, g.specialCharge + 20);
+      if (g.specialCharge === 100 && !previouslyReady)
+        flash('✦ PODER ESPECIAL PRONTO!', SPECIALS[g.character].color);
+      else flash(`+${earned} MALETA!`);
       addParticles(drop.x, drop.y, '#ffce6a', 9); tone('coin');
     } else if (drop.kind === 'paper') {
       if (g.shield) {
@@ -209,6 +244,13 @@
   function update(dt) {
     const g = game;
     g.time = Math.min(g.goal, g.time + dt);
+    g.specialTimer = Math.max(0, g.specialTimer - dt);
+    const nextAct = Math.min(2, Math.floor(g.time / (g.goal / 3)));
+    if (nextAct > g.act) {
+      g.act = nextAct;
+      flash(ACTS[nextAct], '#ffe2a3');
+      tone('shield');
+    }
     g.playerX += (g.targetX - g.playerX) * Math.min(1, dt * 14);
     const speed = 250;
     if (leftHeld || keyboard.left) g.targetX -= speed * dt;
@@ -217,13 +259,19 @@
     g.hurtFor = Math.max(0, g.hurtFor - dt); g.shake = Math.max(0, g.shake - dt);
     g.effectFor = Math.max(0, g.effectFor - dt);
     if (g.effectFor <= 0) feedbackEl.textContent = '';
-    const interval = Math.max(g.goal === 45 ? .42 : .34, .9 - g.time * (g.goal === 45 ? .011 : .007));
+    const interval = Math.max(g.goal === 45 ? .42 : .34,
+      .9 - g.time * (g.goal === 45 ? .011 : .007) - g.act * .045);
     g.emit += dt;
     if (g.emit >= interval) { g.emit -= interval; spawn(); }
     const remaining = [];
     for (const item of g.drops) {
       const oldY = item.y;
-      item.y += item.speed * dt;
+      const slowedPaper = g.character === 'eduardo' && g.specialTimer > 0 && item.kind === 'paper';
+      item.y += item.speed * dt * (slowedPaper ? .4 : 1);
+      if (g.character === 'lula' && g.specialTimer > 0 && item.kind === 'case' &&
+          item.y > HEIGHT * .43 && Math.abs(item.x - g.playerX) < 135) {
+        item.x += (g.playerX - item.x) * Math.min(1, dt * 5);
+      }
       if (oldY < HEIGHT * .79 && item.y >= HEIGHT * .79 && Math.abs(item.x - g.playerX) < 42) {
         collect(item); continue;
       }
@@ -244,7 +292,8 @@
   function drawBackground() {
     const is13 = game.theme === '13';
     const bg = ctx.createLinearGradient(0, 0, 0, HEIGHT);
-    bg.addColorStop(0, '#19314f'); bg.addColorStop(.56, is13 ? '#24182b' : '#092f36'); bg.addColorStop(1, '#06121c');
+    bg.addColorStop(0, game.act === 2 ? '#34233d' : '#19314f');
+    bg.addColorStop(.56, is13 ? '#24182b' : '#092f36'); bg.addColorStop(1, '#06121c');
     ctx.fillStyle = bg; ctx.fillRect(0, 0, WIDTH, HEIGHT);
     ctx.save(); ctx.globalAlpha = .16;
     drawImageCover(cityImages[game.theme], 0, 0, WIDTH, HEIGHT); ctx.restore();
@@ -278,6 +327,12 @@
     const g = game;
     const x = g.playerX, y = HEIGHT * .79;
     if (g.hurtFor > 0 && Math.floor(g.hurtFor * 13) % 2 === 0) return;
+    if (g.specialTimer > 0 && g.character !== 'alckmin') {
+      ctx.strokeStyle = SPECIALS[g.character].color;
+      ctx.lineWidth = 2.5; ctx.globalAlpha = .5 + .2 * Math.sin(g.time * 9);
+      ctx.beginPath(); ctx.ellipse(x, y, 49, 73, 0, 0, Math.PI * 2); ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
     if (g.shield) {
       ctx.strokeStyle = '#5cf2c5b8'; ctx.lineWidth = 4;
       ctx.beginPath();ctx.ellipse(x, y, 47, 76, 0, 0, Math.PI * 2);ctx.stroke();
@@ -348,7 +403,17 @@
     $('hudTime').textContent = `${Math.ceil(Math.max(0,g.goal-g.time))}s`;
     $('hudLives').textContent = '♥ '.repeat(Math.max(0, g.lives)).trim() || '—';
     $('timerFill').style.width = `${100*g.time/g.goal}%`;
-    $('hudCombo').textContent = g.shield ? '🐕 ESCUDO CARAMELO ATIVO' : g.combo >= 3 ? `COMBO ×${g.combo} • SEGURA A MALETA!` : 'MALETA = PONTOS • PAPELADA = PERIGO';
+    $('hudCombo').textContent = g.shield ? '🐕 ESCUDO CARAMELO ATIVO' :
+      g.combo >= 3 ? `COMBO ×${g.combo} • SEGURA A MALETA!` : 'MALETA = PONTOS • PAPELADA = PERIGO';
+    $('hudPhase').textContent = ACTS[g.act];
+    const specialButton = $('specialButton');
+    const ready = g.specialCharge >= 100;
+    specialButton.disabled = !ready || phase !== 'play';
+    specialButton.classList.toggle('ready', ready);
+    specialButton.setAttribute('aria-label', ready ?
+      `Ativar ${SPECIALS[g.character].title}` :
+      `${SPECIALS[g.character].title}: ${g.specialCharge}% carregado`);
+    $('specialCharge').textContent = ready ? 'PRONTO!' : `${g.specialCharge}%`;
   }
   function tick(now) {
     if (phase !== 'play') return;
@@ -371,6 +436,7 @@
     $('resultBest').textContent = Math.max(game.score,oldBest).toLocaleString('pt-BR');
     $('resultCases').textContent = String(game.cases);
     $('resultCombo').textContent = String(game.maxCombo);
+    $('resultPowers').textContent = String(game.specialCount);
     $('resultCopy').textContent = `${CHARACTERS[game.character].name} · Edição ${game.theme} · ${duration}s. ${survived ? 'Missão cumprida!' : 'Quase deu!'}`;
     resultOverlay.classList.remove('hidden');
     if (survived) tone('win'); else tone('hit');
@@ -410,6 +476,7 @@
     if (['ArrowLeft','KeyA'].includes(e.code)) { keyboard.left=true; e.preventDefault(); }
     if (['ArrowRight','KeyD'].includes(e.code)) { keyboard.right=true; e.preventDefault(); }
     if ((e.code === 'Escape' || e.code === 'Space') && !e.repeat) { if(phase==='play')pause(); else resume(); e.preventDefault(); }
+    if (e.code === 'Enter' && phase === 'play' && !e.repeat) { activateSpecial(); e.preventDefault(); }
   });
   document.addEventListener('keyup', e => {
     if (['ArrowLeft','KeyA'].includes(e.code)) keyboard.left=false;
@@ -423,6 +490,7 @@
   $('gotItButton').addEventListener('click',()=>howOverlay.classList.add('hidden'));
   $('soundButton').addEventListener('click',setSound);
   $('pauseButton').addEventListener('click',pause);
+  $('specialButton').addEventListener('click',activateSpecial);
   $('resumeButton').addEventListener('click',resume);
   $('restartButton').addEventListener('click',newGame);
   $('quitButton').addEventListener('click',toMenu);
