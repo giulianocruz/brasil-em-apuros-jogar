@@ -1,0 +1,40 @@
+name: Arcade Correria — testes da jogabilidade
+
+on:
+  push:
+    paths:
+      - 'arcade/**'
+      - '.github/workflows/arcade-qa.yml'
+  pull_request:
+    paths:
+      - 'arcade/**'
+      - '.github/workflows/arcade-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testes-arcade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Checar sintaxe de JavaScript
+        run: node --check arcade/game.js
+      - name: Rodar testes de mecânica e interface
+        run: node --test arcade/tests/*.test.mjs
+      - name: Conferir recursos obrigatórios
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f arcade/index.html
+          test -f arcade/style.css
+          test -f arcade/assets/lula_run.png
+          test -f arcade/assets/alckmin_run.png
+          test -f arcade/assets/flavio_run.png
+          test -f arcade/assets/eduardo_run.png
+          test -f arcade/assets/maleta.png
