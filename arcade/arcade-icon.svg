@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Correria no Planalto">
+<rect width="512" height="512" rx="113" fill="#0c1729"/>
+<rect x="49" y="62" width="193" height="357" rx="49" fill="#9a3045"/>
+<rect x="270" y="62" width="193" height="357" rx="49" fill="#17624e"/>
+<path d="M256 60v358" stroke="#e6bb70" stroke-width="13" opacity=".7"/>
+<g fill="#fff6e7" stroke="#152338" stroke-width="9" paint-order="stroke" font-size="140" font-family="Impact,'Arial Black',sans-serif" font-weight="900" text-anchor="middle"><text x="146" y="298">13</text><text x="368" y="298">22</text></g>
+<circle cx="256" cy="222" r="39" fill="#ffd272" stroke="#0d1828" stroke-width="9"/>
+<path d="m256 191 8 19 21 2-16 14 5 21-18-11-19 11 5-21-16-14 22-2z" fill="#0c192b"/>
+<rect x="43" y="381" width="426" height="84" rx="28" fill="#ffd477" stroke="#091222" stroke-width="9"/>
+<text x="256" y="440" font-family="Impact,'Arial Black',sans-serif" font-size="62" font-weight="900" fill="#11223a" text-anchor="middle">APUROS!</text>
+</svg>
