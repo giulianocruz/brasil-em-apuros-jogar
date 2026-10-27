@@ -25,6 +25,8 @@ jobs:
           node-version: '22'
       - name: Checar sintaxe de JavaScript
         run: node --check arcade/game.js
+      - name: Checar sintaxe do modo offline
+        run: node --check arcade/sw.js
       - name: Rodar testes de mecânica e interface
         run: node --test arcade/tests/*.test.mjs
       - name: Conferir recursos obrigatórios
