@@ -150,3 +150,16 @@ test('Pause, resume, quit and restart reset the game safely', () => {
   g.get('startButton').dispatch('click');
   assert.equal(g.get('specialCharge').textContent, '0%');
 });
+
+test('Install manifest and offline cache remain scoped to the mini arcade', () => {
+  const manifest = JSON.parse(fs.readFileSync(new URL('../manifest.webmanifest', import.meta.url), 'utf8'));
+  const sw = fs.readFileSync(new URL('../sw.js', import.meta.url), 'utf8');
+  assert.equal(manifest.scope, './');
+  assert.equal(manifest.start_url, './');
+  assert.equal(manifest.display, 'standalone');
+  assert.ok(manifest.icons.some(icon => icon.sizes === 'any'));
+  assert.match(page, /rel="manifest"/);
+  assert.match(sw, /correria-no-planalto-v02/);
+  assert.match(sw, /assets\/lula_run\.png/);
+  assert.match(sw, /assets\/eduardo_run\.png/);
+});
