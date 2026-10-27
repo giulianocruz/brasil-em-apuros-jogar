@@ -1,0 +1,11 @@
+.git
+.github
+.gitignore
+.nojekyll
+docs
+tools
+**/*.log
+**/*.tmp
+**/*.bak
+**/*.map
+.DS_Store

@@ -1,0 +1,41 @@
+name: Deploy Brasil em Apuros na VPS
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Acionar implantação Coolify do app previamente configurado
+        shell: bash
+        env:
+          COOLIFY_BASE_URL: ${{ vars.COOLIFY_BASE_URL }}
+          COOLIFY_APP_UUID: ${{ vars.COOLIFY_APP_UUID }}
+          COOLIFY_API_TOKEN: ${{ secrets.COOLIFY_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${COOLIFY_BASE_URL}" || -z "${COOLIFY_APP_UUID}" || -z "${COOLIFY_API_TOKEN}" ]]; then
+            echo "::error::Configure COOLIFY_BASE_URL, COOLIFY_APP_UUID e o secret COOLIFY_API_TOKEN nas configurações Actions."
+            exit 1
+          fi
+          if [[ "${COOLIFY_BASE_URL}" != https://* ]]; then
+            echo "::error::A URL do painel Coolify precisa usar HTTPS."
+            exit 1
+          fi
+          if [[ ! "${COOLIFY_APP_UUID}" =~ ^[a-zA-Z0-9-]+$ ]]; then
+            echo "::error::UUID da aplicação inválido."
+            exit 1
+          fi
+          url="${COOLIFY_BASE_URL%/}/api/v1/deploy"
+          curl --fail --show-error --silent --retry 2 --max-time 30 \
+            -X POST \
+            -H "Authorization: Bearer ${COOLIFY_API_TOKEN}" \
+            -H "Accept: application/json" \
+            --get --data-urlencode "uuid=${COOLIFY_APP_UUID}" \
+            "${url}" > response.json
+          jq -e '.deployments | type == "array" and length > 0' response.json > /dev/null
+          echo "Coolify aceitou a solicitação de deploy. Verifique o resultado no painel."

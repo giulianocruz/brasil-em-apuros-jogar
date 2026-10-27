@@ -1,0 +1,40 @@
+name: Verificar contêiner Web para VPS
+on:
+  pull_request:
+    paths:
+      - 'deploy/vps/**'
+      - '.dockerignore'
+      - '.github/workflows/coolify-web-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  docker-vps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Construir imagem de produção
+        run: docker build -f deploy/vps/Dockerfile -t brasil-em-apuros:web-vps .
+      - name: Iniciar e verificar rotas com Nginx
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run -d --name brasil-web-vps-ci -p 127.0.0.1:18080:80 brasil-em-apuros:web-vps
+          trap 'docker rm -f brasil-web-vps-ci >/dev/null 2>&1 || true' EXIT
+          for t in 1 2 3 4 5 6 7 8 9 10; do
+            if curl -fsS http://127.0.0.1:18080/health >/dev/null; then break; fi
+            sleep 1
+          done
+          test "$(curl -fsS http://127.0.0.1:18080/health)" = "ok"
+          for path in / /index.html /urna.html /13/ /22/ \
+            /13/pack-sw.js /22/pack-sw.js \
+            /13/index.pck.part01 /22/index.pck.part01 \
+            /13/index.wasm /22/index.wasm; do
+            curl -fsSI "http://127.0.0.1:18080$path" >/dev/null
+          done
+          curl -fsSI http://127.0.0.1:18080/13/index.wasm | grep -iq 'content-type: application/wasm'
+          curl -fsSI http://127.0.0.1:18080/22/index.wasm | grep -iq 'content-type: application/wasm'
+          echo "OK: portal, urna, campanhas, segmentos e MIME WebAssembly."
