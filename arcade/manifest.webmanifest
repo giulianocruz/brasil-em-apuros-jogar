@@ -1,0 +1,27 @@
+{
+  "id": "./",
+  "name": "Brasil em Apuros! — Correria no Planalto",
+  "short_name": "Correria!",
+  "description": "Arcade satírico original com Lula, Alckmin, Flávio e Eduardo. Partidas curtas, especiais e recordes.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#091021",
+  "background_color": "#091021",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "./arcade-icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "../13/index.icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    }
+  ]
+}
