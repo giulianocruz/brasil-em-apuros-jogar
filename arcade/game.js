@@ -499,4 +499,13 @@
   $('shareButton').addEventListener('click',shareScore);
   if (read('br-arcade-sound',1) === 2) setSound();
   syncSetup();
+  // Register only the arcade-specific offline cache on safe HTTP origins.
+  if ('serviceWorker' in navigator &&
+      (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {
+        // Offline caching is optional; playing online must always work.
+      });
+    });
+  }
 })();
