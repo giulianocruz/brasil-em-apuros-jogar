@@ -2,6 +2,12 @@
 
 Dois jogos de plataforma e sátira ficcional criados com Godot 4.7.2, publicados gratuitamente em versões de teste para navegador, Android e Windows. Não é um projeto eleitoral e não possui vínculo com partidos ou candidatos.
 
+## Mini arcade — Correria no Planalto v0.2
+
+Um terceiro jogo independente de partidas rápidas foi incluído em [`/arcade/`](https://giulianocruz.github.io/brasil-em-apuros-jogar/arcade/). Ele usa os sprites de Lula, Alckmin, Flávio e Eduardo, com poderes individuais, três atos, coleta de maletas, proteção Caramelo e recordes locais. Tem suporte experimental a instalação na tela inicial via manifesto e Service Worker, sem APK próprio e sem AdMob nesta edição. O mini arcade mantém código, cache e testes separados dos dois projetos Godot.
+
+Veja `arcade/README.md` e `arcade/TESTES.md`.
+
 ## Navegação
 
 - index.html: portal premium, galeria com imagens reais dos jogos e links de download.
