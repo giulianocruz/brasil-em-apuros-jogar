@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-		<title>Brasil em Apuros! 22</title>
+		<title>Brasil em Apuros! 22 — Controles de teclado e habilidades</title>
+		<link rel="stylesheet" href="../desktop-controls.css?v=1">
+		<script defer src="../desktop-controls.js?v=1"></script>
 		<style>
 html, body, #canvas {
 	margin: 0;
@@ -221,6 +223,7 @@ navigator.serviceWorker.addEventListener('controllerchange',()=>{clearTimeout(ti
 			},
 		})).then(() => {
 			setStatusMode('hidden');
+			window.dispatchEvent(new Event('brasil:godot-ready'));
 		}, displayFailureNotice);
 	}
 }());
