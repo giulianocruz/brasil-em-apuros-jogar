@@ -23,3 +23,14 @@
 @keyframes power-pulse{from{box-shadow:0 0 10px #ffcf6d33}to{box-shadow:0 0 25px #ffcf6d99}}
 @media(max-width:350px){.game-controls{padding:0 9px}.game-controls button:not(.special-button){width:53px;height:53px}.game-controls .special-button{min-width:125px;max-width:calc(100% - 115px)}.ability-hint{font-size:9px;padding:5px}}
 @media(prefers-reduced-motion:reduce){.game-controls .special-button.ready{animation:none}}
+
+
+/* Tutorial de comandos do desktop e atalho explícito da habilidade */
+.desktop-howto,.desktop-ability-help{display:none}
+@media (hover:hover) and (pointer:fine){
+  .desktop-howto{display:block;border:1px solid #e8c27d80;border-radius:10px;background:#102636ed;color:#f4e7cb;padding:10px 12px;font-size:10.5px;line-height:1.7;margin:0;text-align:center}
+  .desktop-howto strong{color:#ffdb91}
+  .desktop-howto kbd,.desktop-ability-help kbd{background:#eacb8a;color:#182338;padding:3px 6px;border-radius:5px;font:900 11px system-ui;box-shadow:inset 0 -2px #ad905d;white-space:nowrap}
+  .touch-hint{display:none}
+  .desktop-ability-help{display:block;position:absolute;bottom:85px;left:12px;right:12px;text-align:center;color:#f6e6bc;text-shadow:0 2px 5px #000;background:#091725c8;border:1px solid #d2b5757e;padding:8px 6px;border-radius:8px;font-size:9px;line-height:1.65;font-weight:850;letter-spacing:.025em;pointer-events:none;margin:0}
+}
