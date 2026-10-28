@@ -86,6 +86,28 @@
     if(event.target===dialog)dialog.close();
   });
 
+  // Compartilhamento do endereço oficial sem parâmetros de rastreamento.
+  const shareButton=document.getElementById('share-page');
+  const shareStatus=document.getElementById('share-feedback');
+  shareButton?.addEventListener('click',async()=>{
+    const url=document.querySelector('link[rel="canonical"]')?.href || location.href;
+    const title='Brasil em Apuros! — Edições 13 e 22';
+    try{
+      if(typeof navigator.share==='function'){
+        await navigator.share({title,url});
+        if(shareStatus)shareStatus.textContent='Link compartilhado!';
+      }else if(navigator.clipboard?.writeText){
+        await navigator.clipboard.writeText(url);
+        if(shareStatus)shareStatus.textContent='Link oficial copiado para compartilhar!';
+      }else if(shareStatus){
+        shareStatus.textContent='Compartilhe este endereço: '+url;
+      }
+    }catch(error){
+      if(error?.name==='AbortError')return;
+      if(shareStatus)shareStatus.textContent='Compartilhe este endereço: '+url;
+    }
+  });
+
   const header=document.querySelector('.site-header');
   const checkScroll=()=>header?.classList.toggle('is-scrolled',window.scrollY>60);
   window.addEventListener('scroll',checkScroll,{passive:true});
