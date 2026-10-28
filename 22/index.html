@@ -113,12 +113,12 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":121768332,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":121768780,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 async function prepareSplitPack(){
 if(!('serviceWorker' in navigator))throw Error('Este navegador precisa suportar Service Workers.');
-await navigator.serviceWorker.register('./pack-sw.js?v=8ac3f86e5538',{scope:'./'});await navigator.serviceWorker.ready;
+await navigator.serviceWorker.register('./pack-sw.js?v=776a38e38c42',{scope:'./'});await navigator.serviceWorker.ready;
 if(!navigator.serviceWorker.controller){
 await new Promise((resolve,reject)=>{
 const timeout=setTimeout(()=>reject(Error('Falha no carregador. Atualize a pagina.')),15000);
