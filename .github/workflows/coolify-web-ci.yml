@@ -1,8 +1,16 @@
 name: Verificar contêiner Web para VPS
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'deploy/vps/**'
+      - 'arcade/**'
+      - '.dockerignore'
+      - '.github/workflows/coolify-web-ci.yml'
   pull_request:
     paths:
       - 'deploy/vps/**'
+      - 'arcade/**'
       - '.dockerignore'
       - '.github/workflows/coolify-web-ci.yml'
   workflow_dispatch:
@@ -29,7 +37,7 @@ jobs:
             sleep 1
           done
           test "$(curl -fsS http://127.0.0.1:18080/health)" = "ok"
-          for path in / /index.html /urna.html /13/ /22/ \
+          for path in / /index.html /urna.html /arcade/ /13/ /22/ \
             /13/pack-sw.js /22/pack-sw.js \
             /13/index.pck.part01 /22/index.pck.part01 \
             /13/index.wasm /22/index.wasm; do
