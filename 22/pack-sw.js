@@ -1,5 +1,5 @@
 'use strict';
-const BUILD_VERSION = '776a38e38c42';
+const BUILD_VERSION = '08ae6d04e173';
 const PARTS = ["index.pck.part01","index.pck.part02","index.pck.part03"];
 self.addEventListener('install',e=>e.waitUntil(self.skipWaiting()));
 self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));
