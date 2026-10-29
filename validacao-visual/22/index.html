@@ -118,7 +118,7 @@ const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 async function prepareSplitPack(){
 if(!('serviceWorker' in navigator))throw Error('Este navegador precisa suportar Service Workers.');
-await navigator.serviceWorker.register('./pack-sw.js?v=953759f84a64',{scope:'./'});await navigator.serviceWorker.ready;
+await navigator.serviceWorker.register('./pack-sw.js?v=9fc8c8ac5a0f',{scope:'./'});await navigator.serviceWorker.ready;
 if(!navigator.serviceWorker.controller){
 await new Promise((resolve,reject)=>{
 const timeout=setTimeout(()=>reject(Error('Falha no carregador. Atualize a pagina.')),15000);
