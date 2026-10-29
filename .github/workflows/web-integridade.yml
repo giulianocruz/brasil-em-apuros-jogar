@@ -13,6 +13,10 @@ on:
       - '13/**'
       - '22/**'
       - 'tools/verificar-publicacao.mjs'
+      - 'stream-loader.js'
+      - 'validacao-visual/**'
+      - 'tools/web-pack-*'
+      - 'tools/atualizar-carregador.mjs'
       - '.github/workflows/web-integridade.yml'
   workflow_dispatch:
 
@@ -31,3 +35,6 @@ jobs:
           node-version: '22'
       - name: Verificar links, integridade e hash dos dois jogos
         run: node tools/verificar-publicacao.mjs
+
+      - name: Testar transferência contínua e recuperação de downloads
+        run: node --test tools/web-pack-sw.test.mjs

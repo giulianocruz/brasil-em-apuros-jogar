@@ -81,7 +81,7 @@ async function verificarEdicao(numero) {
   }
   reportar(!faltando && total === esperado, pasta + ': soma dos segmentos = ' + esperado + ' bytes');
   reportar(html.includes('"index.pck":' + esperado), pasta + ': configuração Godot usa o mesmo tamanho');
-  reportar(html.includes('prepareSplitPack()'), pasta + ': pré-carregamento do Service Worker habilitado');
+  reportar((html.includes('prepareSplitPack()') || (html.includes('stream-loader.js') && carregador.includes('new ReadableStream'))), pasta + ': pré-carregamento do Service Worker habilitado');
   const wasm = await existe(pasta + '/index.wasm');
   reportar(Boolean(wasm?.isFile() && wasm.size > 0), pasta + ': WebAssembly existente');
 
@@ -103,7 +103,7 @@ try {
   reportar(logica.includes("'13': './13/'") && logica.includes("'22': './22/'"), 'confirmação navega para ambos os jogos');
   reportar(logica.includes('window.location.assign') && !/localStorage|sessionStorage|sendBeacon|fetch\(/.test(logica), 'seletor não grava ou transmite escolhas');
   for (const arquivo of ['index.html', 'urna.html', 'premium.css', 'urna.css']) await verificarReferencias(arquivo);
-  for (const numero of [13, 22]) await verificarEdicao(numero);
+  for (const numero of [13, 22, 'validacao-visual/13', 'validacao-visual/22']) await verificarEdicao(numero);
 } catch (erro) {
   reportar(false, 'Exceção na auditoria: ' + (erro.stack || erro.message));
 }
