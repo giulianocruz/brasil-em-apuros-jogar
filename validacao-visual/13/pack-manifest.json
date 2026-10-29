@@ -1,0 +1,10 @@
+{
+  "version": "visual-2026.10.29",
+  "size": 124318156,
+  "sha256": "b0bdce6f16ec8095b7a6c22390c18983540787acf0f87a5117d1241d1e8a4369",
+  "parts": [
+    "index.pck.part01",
+    "index.pck.part02",
+    "index.pck.part03"
+  ]
+}
