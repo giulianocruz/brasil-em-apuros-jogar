@@ -21,6 +21,7 @@ Os pacotes de gameplay e suas hashes não foram alterados. A primeira abertura a
 - Sete testes automatizados do worker: primeiro bloco antes do pacote completo, ordem/integridade, erro HTTP temporário, interrupção no meio com Range, servidor que ignora Range, falha permanente limitada e isolamento por origem/escopo.
 - Auditoria de arquivos e SHA-256 das quatro entradas Web.
 - Campanha 22 aberta no navegador local com o carregador novo; progresso por parte observado, chegada ao menu e nenhum erro de console nessa abertura. Captura em validacao-visual/loading-fixed-22.png.
+- Após a publicação, a campanha 13 abriu até o menu no endereço público com cache anterior, exibiu avanço real por parte e não registrou erro de console. Captura em validacao-visual/loading-fixed-13.png.
 
 ## Regenerar o carregador
 
