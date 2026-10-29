@@ -1,7 +1,8 @@
 {
-  "version": "visual-2026.10.29",
-  "size": 124318156,
-  "sha256": "b0bdce6f16ec8095b7a6c22390c18983540787acf0f87a5117d1241d1e8a4369",
+  "version": "level-design-v2-2026.10.29",
+  "source_commit": "d9c372b452313d58688d43ef0d2d24bc17294d11",
+  "size": 124327176,
+  "sha256": "e1ea9c1e68b2207d2d51ffd788c38e3935beb1708b794e7a9fbdc654882c45a0",
   "parts": [
     "index.pck.part01",
     "index.pck.part02",
