@@ -1,0 +1,30 @@
+{
+  "version": "artes-v3-2026.10.29",
+  "publicacao_validada": "0ecf4c09902e6a7791a8e285645095f4c9a34228",
+  "pages_run": 40897138091,
+  "pages_status": "success",
+  "manifestos_publicos": [
+    {
+      "n": "13",
+      "size": 125185580,
+      "sha256": "60b4b970734d2ecaf9c663c49b003ed0993f5966e8a540c393eb949c53a92441"
+    },
+    {
+      "n": "22",
+      "size": 122665076,
+      "sha256": "54fed8a3854bb0f55cd3e3d8b37ed24404d414f534802e2f2990f1b7335ded46"
+    }
+  ],
+  "browser": {
+    "edicao": 13,
+    "resultado": "Menu e fase abertos; arte do Caramelo e terreno confirmadas visualmente; nenhum erro de console observado",
+    "captura": "artes-v3-publico-13.png"
+  },
+  "qa": {
+    "saltos": 84,
+    "falhas": 0,
+    "progressao": "oito combinações",
+    "auditoria_web": 95,
+    "testes_carregador": 7
+  }
+}
