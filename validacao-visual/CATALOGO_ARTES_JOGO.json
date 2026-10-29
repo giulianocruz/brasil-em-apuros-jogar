@@ -1,0 +1,90 @@
+{
+  "versao": "artes-v3-20261029",
+  "criterios": [
+    "fonte explícita",
+    "quadro íntegro",
+    "transparência validada",
+    "pés apoiados",
+    "contraste com fundo",
+    "colisão coincide com arte"
+  ],
+  "fontes": [
+    {
+      "elemento": "Janja",
+      "arquivo": "assets/animacoes_elenco/janja/resgate_aprovado_sheet.png",
+      "origem": "Cópia sem edição da victory_sheet.png limpa da edição 13",
+      "usos": [
+        "menu",
+        "resgate",
+        "retratos de resultado"
+      ],
+      "largura_quadro": 256,
+      "quadros": 6
+    },
+    {
+      "elemento": "Caramelo",
+      "arquivo": "assets/personagens/caramelo/idle.png",
+      "origem": "Sprite criado para Artes V3 com geração de imagem",
+      "usos": [
+        "fase externa",
+        "castelo"
+      ],
+      "quadros": 1,
+      "pendencia": "folha de caminhada/latido"
+    },
+    {
+      "elemento": "Solo externo",
+      "arquivo": "assets/flow_lote11/27_tileset_terreno.jpg",
+      "usos": [
+        "pisos",
+        "plataformas"
+      ]
+    },
+    {
+      "elemento": "Solo castelo",
+      "arquivo": "assets/flow_lote11/13_tileset_castelo.jpg",
+      "usos": [
+        "pisos",
+        "plataformas"
+      ]
+    },
+    {
+      "elemento": "Portal",
+      "arquivo": "assets/flow_lote12/37_flow.jpg",
+      "recorte": [
+        843,
+        423,
+        177,
+        184
+      ],
+      "chroma": "verde",
+      "usos": [
+        "saída externa",
+        "resgate"
+      ]
+    },
+    {
+      "elemento": "Gaiola",
+      "arquivo": "assets/flow_lote11/31_gaiola_magica.jpg",
+      "chroma": "branco",
+      "usos": [
+        "resgate fechado/aberto"
+      ]
+    },
+    {
+      "elemento": "Carimbo",
+      "arquivo": "assets/ui/hud/flow_carimbo.png",
+      "chroma": "branco",
+      "usos": [
+        "armadilha de carimbo"
+      ]
+    }
+  ],
+  "recusadas": [
+    {
+      "arquivo": "assets/animacoes_elenco/janja/idle_sheet.png",
+      "motivo": "Chroma residual e poses cortadas na fonte 13; fonte homônima diverge na edição 22",
+      "acao": "Preservada, substituída em runtime pela sequência explicitamente aprovada"
+    }
+  ]
+}

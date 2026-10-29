@@ -1,8 +1,8 @@
 {
-  "version": "level-design-v2-2026.10.29",
-  "source_commit": "83a3207d0a9a05224b5b0447f8f236fabea47917",
-  "size": 124327176,
-  "sha256": "8cc25365ef40adc99c29bc0fae5f2440f257bda648c7373052a2fbddd74657d6",
+  "version": "artes-v3-2026.10.29",
+  "source_commit": "efbe77e0bb3b73ea45f908a5ce0b84ebab2e8051",
+  "size": 125185580,
+  "sha256": "60b4b970734d2ecaf9c663c49b003ed0993f5966e8a540c393eb949c53a92441",
   "parts": [
     "index.pck.part01",
     "index.pck.part02",
