@@ -1,0 +1,46 @@
+{
+  "versao": "aventura-v4-2026.10.29",
+  "build_commit": "23281b3448cd355cbb7eebcfa5eeda8e22d85ed9",
+  "source_commits": {
+    "13": "0162b030267ab8a9ee9c0674b646edafb5fe0db7",
+    "22": "e8f5a103b0e9a81c43689f35c084e4a13ae80d21"
+  },
+  "pages": {
+    "run_id": 40911885290,
+    "status": "success"
+  },
+  "pacotes": [
+    {
+      "n": "13",
+      "size": 125200940,
+      "sha256": "fafcbefa2eacca6035634605bf3f97e3d203ffbb31dafdb7212bdae925b838eb"
+    },
+    {
+      "n": "22",
+      "size": 122680468,
+      "sha256": "0611c3d9811e983ebf96bae456ca4eb66d8b705624acdfc2f5d47a92f02a598f"
+    }
+  ],
+  "validacao": {
+    "continuidade_cenarios": 20,
+    "saltos_fisicos": 84,
+    "auditoria_web": 95,
+    "testes_carregador": 7,
+    "browser": {
+      "edicao": 13,
+      "fluxo": [
+        "iniciar",
+        "pausar",
+        "voltar ao menu",
+        "recarregar a página",
+        "continuar"
+      ],
+      "resultado": "Menu recuperou a missão e o jogo retomou sem repetir o prólogo; nenhum erro de console observado",
+      "capturas": [
+        "aventura-v4-publico-continuar.png",
+        "aventura-v4-publico-retomada.png"
+      ],
+      "limite": "Preservação dos selos no castelo coberta pelos cenários nativos, nas duas edições."
+    }
+  }
+}
