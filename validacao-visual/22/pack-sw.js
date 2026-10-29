@@ -1,6 +1,6 @@
 'use strict';
 // Configuracao substituida pelo empacotador; nao junta os pacotes na memoria do worker.
-const PACK = {"version":"54fed8a3854b","size":122665076,"parts":[{"name":"index.pck.part01","size":44040192},{"name":"index.pck.part02","size":44040192},{"name":"index.pck.part03","size":34584692}]};
+const PACK = {"version":"0611c3d9811e","size":122680468,"parts":[{"name":"index.pck.part01","size":44040192},{"name":"index.pck.part02","size":44040192},{"name":"index.pck.part03","size":34600084}]};
 self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
 self.addEventListener('message', event => {

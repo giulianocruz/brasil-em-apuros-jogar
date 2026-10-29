@@ -1,8 +1,8 @@
 {
-  "version": "artes-v3-2026.10.29",
-  "source_commit": "3af47b49255a310f2b44625a37efc0ecbb2e015e",
-  "size": 122665076,
-  "sha256": "54fed8a3854bb0f55cd3e3d8b37ed24404d414f534802e2f2990f1b7335ded46",
+  "version": "aventura-v4-2026.10.29",
+  "source_commit": "e8f5a103b0e9a81c43689f35c084e4a13ae80d21",
+  "size": 122680468,
+  "sha256": "0611c3d9811e983ebf96bae456ca4eb66d8b705624acdfc2f5d47a92f02a598f",
   "parts": [
     "index.pck.part01",
     "index.pck.part02",
